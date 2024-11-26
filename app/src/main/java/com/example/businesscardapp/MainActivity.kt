@@ -26,7 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BusinessCardAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Background
@@ -55,10 +56,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BusinessCardApp(){
     Column (
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally, 
-//        verticalArrangement = Arrangement.Center
+//        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Spacer(modifier = Modifier.weight(1f))
         HeaderSection()
@@ -82,11 +82,11 @@ fun HeaderSection(){
             modifier = Modifier.size(100.dp)
         )
         Text(
-            text = "Alena Kellnerova",
+            text = stringResource(R.string.name),
             fontSize = 32.sp
         )
         Text(
-            text = "Android Developer Extraordinaire",
+            text = stringResource(R.string.title),
             color = CustomGreen,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp)
@@ -100,33 +100,27 @@ fun ContactInfoSection(){
     Column (
         modifier = Modifier.padding(40.dp)
     ){
-        Row {
-            Icon(
-                Icons.Default.Phone,
-                tint = CustomGreen,
-                contentDescription = "icon phone"
-            )
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(text = "+123456789")
-        }
-        Row{
-            Icon(
-                Icons.Default.Share,
-                tint = CustomGreen,
-                contentDescription = "icon share"
-            )
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(text = "@AndroidDev")
-        }
-        Row {
-            Icon(
-                Icons.Default.Email,
-                tint = CustomGreen,
-                contentDescription = "icon email"
-            )
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(text = "jon.doe@android.com")
-        }
+        ContactRow(icon = Icons.Default.Phone, text = stringResource(R.string.phone), contentDescription = stringResource(R.string.icon_phone_cd))
+        ContactRow(icon = Icons.Default.Share, text = stringResource(R.string.share_handle), contentDescription = stringResource(
+            R.string.icon_share_cd
+        )
+        )
+        ContactRow(icon = Icons.Default.Email, text = stringResource(R.string.email), contentDescription = stringResource(
+            R.string.icon_email_cd
+        ) )
+    }
+}
+
+@Composable
+fun ContactRow(
+    icon: ImageVector,
+    text: String,
+    contentDescription: String
+){
+    Row {
+        Icon(icon, tint = CustomGreen, contentDescription = contentDescription)
+        Spacer(modifier = Modifier.width(20.dp))
+        Text(text = text)
     }
 }
 
@@ -136,8 +130,6 @@ fun ContactInfoSection(){
 @Composable
 fun GreetingPreview() {
     BusinessCardAppTheme {
-//        HeaderSection()
-//        ContactInfoSection()
         BusinessCardApp()
     }
 }

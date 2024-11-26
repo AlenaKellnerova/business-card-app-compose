@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Business Card App</string>
+    <string name="name">Alena Kellnerova</string>
+    <string name="title">Android Developer Extraordinaire</string>
+    <string name="phone">+123456789</string>
+    <string name="share_handle">\@AndroidDev</string>
+    <string name="email">jon.doe@android.com</string>
+    <string name="icon_phone_cd">icon phone</string>
+    <string name="icon_share_cd">icon share</string>
+    <string name="icon_email_cd">icon email</string>
 </resources>
